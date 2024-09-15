@@ -1,4 +1,4 @@
-﻿/*---------------------------------------------------------*\
+/*---------------------------------------------------------*\
 | pci_ids.h                                                 |
 |                                                           |
 |   PCI Vendor and Device ID constants                      |
@@ -110,6 +110,7 @@
 #define NVIDIA_RTX4070S_DEV                             0x2783
 #define NVIDIA_RTX4070TI_DEV                            0x2782
 #define NVIDIA_RTX4070TIS_DEV                           0x2705
+#define NVIDIA_RTX4070TIS_AD102_DEV                     0x2689
 #define NVIDIA_RTX4080_DEV                              0x2704
 #define NVIDIA_RTX4080S_DEV                             0x2702
 #define NVIDIA_RTX4090_DEV                              0x2684
@@ -284,8 +285,6 @@
 #define ASUS_TUF_RTX_3090TI_24G_GAMING                  0x8875
 #define ASUS_TUF_RTX_3090TI_O24G_OC_GAMING              0x8874
 #define ASUS_ROG_STRIX_LC_RTX_3090TI_O24G_GAMING        0x8870
-#define ASUS_ROG_STRIX_RTX_4070TI_O12G_GAMING           0x88E5
-#define ASUS_ROG_STRIX_RTX_4070TI_O12G_GAMING_2         0x88A7
 #define ASUS_TUF_RX_6700XT_O12G_GAMING                  0x05C9
 #define ASUS_ROG_STRIX_RX_6700XT_O12G_GAMING            0x05C7
 #define ASUS_ROG_STRIX_RX_6750XT_O12G_GAMING            0x05E5
@@ -317,6 +316,9 @@
 #define ASUS_TUF_RTX_4070TI_SUPER_16G_GAMING            0x8958
 #define ASUS_TUF_RTX_4070TI_SUPER_O16G_GAMING           0x8957
 #define ASUS_TUF_RTX_4070TI_SUPER_O16G_GAMING_WHITE     0x895B
+#define ASUS_ROG_STRIX_RTX_4070TI_12G_GAMING            0x88A6
+#define ASUS_ROG_STRIX_RTX_4070TI_O12G_GAMING           0x88E5
+#define ASUS_ROG_STRIX_RTX_4070TI_O12G_GAMING_2         0x88A7
 #define ASUS_ROG_STRIX_RTX_4070TI_SUPER_16G_GAMING      0x896B
 #define ASUS_ROG_STRIX_RTX_4070TI_SUPER_O16G_GAMING     0x896D
 #define ASUS_TUF_RTX_4080_16G_GAMING                    0x88A2
@@ -370,6 +372,7 @@
 #define COLORFUL_IGAME_RTX_3080_ULTRAW_OC_10G           0x1501
 #define COLORFUL_IGAME_RTX_3080_ULTRAW_OC_10G_2         0x150A
 #define COLORFUL_IGAME_RTX_4070_TI_ADVANCED_OCV         0x1400
+#define COLORFUL_IGAME_RTX_4070_TI_SUPER_ADVANCED_OCV2  0x1400
 #define COLORFUL_IGAME_RTX_4070_VULCAN_OCV              0x1200
 #define COLORFUL_IGAME_RTX_4080_ULTRAW_OCV              0x1500
 #define COLORFUL_IGAME_RTX_4080_ULTRAW_OCV2             0x1501
@@ -482,6 +485,7 @@
 #define GAINWARD_GTX_1080_TI_PHOENIX                    0x1B06
 #define GAINWARD_RTX3050_SUB_DEV                        0x2507
 #define GAINWARD_RTX_3070_PHANTOM                       0xF279
+#define GAINWARD_RTX_4070_GHOST_SUB_DEV                 0xF303
 
 /*-----------------------------------------------------*\
 | GALAX / KFA2 Sub-Device IDs                           |
@@ -512,6 +516,7 @@
 #define GIGABYTE_GTX1650_GAMING_OC_SUB_DEV              0x3FE4
 #define GIGABYTE_GTX1660_GAMING_OC_6G_SUB_DEV           0x3FC7
 #define GIGABYTE_GTX1660S_GAMING_OC_SUB_DEV             0x4014
+#define GIGABYTE_GTX1660TI_GAMING_OC_SUB_DEV            0x3FC5
 #define GIGABYTE_RTX2060_GAMING_OC_SUB_DEV              0x37CE
 #define GIGABYTE_RTX2060_GAMING_OC_PRO_SUB_DEV          0x3FC2
 #define GIGABYTE_RTX2060_GAMING_OC_PRO_SUB_DEV2         0x3FC9
@@ -589,6 +594,7 @@
 #define GIGABYTE_RTX4070S_AERO_OC_12G                   0x4139
 #define GIGABYTE_RTX4070TI_GAMING_12G                   0x40DF
 #define GIGABYTE_RTX4070TI_GAMING_OC_12G                0x40C6
+#define GIGABYTE_RTX4070TI_EAGLE_OC_SUB_DEV             0x40CA
 #define GIGABYTE_RTX4070TI_GAMING_OC_12G_SUB_DEV2       0x4100
 #define GIGABYTE_RTX4070TIS_EAGLE_OC_16G_SUB_DEV        0x413E
 #define GIGABYTE_RTX4070TIS_GAMING_OC_16G_SUB_DEV       0x413C
@@ -674,6 +680,7 @@
 #define MSI_RTX4080_SUPRIM_X_SUB_DEV                    0x5110
 #define MSI_RTX4080S_GAMING_X_SLIM_SUB_DEV              0x5117
 #define MSI_RTX4080S_GAMING_X_SLIM_WHITE_SUB_DEV        0x511A
+#define MSI_RTX4080S_GAMING_X_TRIO_SUB_DEV              0x5111
 #define MSI_RTX4090_GAMING_X_SLIM_SUB_DEV               0x510B
 #define MSI_RTX4090_GAMING_X_TRIO_SUB_DEV               0x5103
 #define MSI_RTX4090_SUPRIM_LIQUID_X_SUB_DEV             0x5104

@@ -346,19 +346,20 @@ void RGBController_DRGB::DeviceUpdateLEDs()
                 unsigned char   RGBData[256*3]  = {0};
                 unsigned char   ArrayData[64]   = {0};
                 unsigned char   LEDnum          = zones[zone_idx].leds_count;
-                for(unsigned int i=0; i<LEDnum;i++)
+                for(unsigned int i = 0; i < LEDnum; i++)
                 {
                     unsigned int RGBcolors = zones[zone_idx].colors[i];
                     RGBData[i * 3]      = RGBcolors & 0xFF;
                     RGBData[i * 3 +1]   = (RGBcolors >> 8) & 0xFF;
                     RGBData[i * 3 +2]   = (RGBcolors >> 16) & 0xFF;
                 }
+
                 unsigned char   NumPackets      = LEDnum / DRGB_V2_PACKAGE_SIZE + ((LEDnum % DRGB_V2_PACKAGE_SIZE) > 0);
-                for (unsigned int CurrPacket = 1 ; CurrPacket <= NumPackets; CurrPacket++)
+                for(unsigned char CurrPacket = 1; CurrPacket <= NumPackets; CurrPacket++)
                 {
                     ArrayData[0] = CurrPacket;
                     ArrayData[1] = NumPackets;
-                    ArrayData[2] = zone_idx;
+                    ArrayData[2] = (unsigned char)zone_idx;
                     ArrayData[3] = 0xBB;
                     for(unsigned int i=0; i<60;i++)
                     {

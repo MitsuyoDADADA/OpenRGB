@@ -1,20 +1,24 @@
-/*-----------------------------------------*\
-|  SteelSeriesSenseiController.h            |
-|                                           |
-|  Definitions and types for SteelSeries    |
-|  Sensei lighting controller               |
-|  Based on Rival controller by             |
-|  B Horn (bahorn) 13/5/2020                |
-\*-----------------------------------------*/
+/*---------------------------------------------------------*\
+| SteelSeriesSenseiController.cpp                           |
+|                                                           |
+|   Driver for SteelSeries Sensei                           |
+|                                                           |
+|   Based on SteelSeries Rival controller                   |
+|   B Horn (bahorn)                             13 May 2020 |
+|                                                           |
+|   This file is part of the OpenRGB project                |
+|   SPDX-License-Identifier: GPL-2.0-only                   |
+\*---------------------------------------------------------*/
 
-#include "SteelSeriesSenseiController.h"
 #include <cstring>
 #include <stdio.h>
 #include <stdlib.h>
+#include "SteelSeriesSenseiController.h"
+#include "StringUtils.h"
 
-static void send_usb_msg(hid_device* dev, char * data_pkt, unsigned int size)
+static void send_usb_msg(hid_device* dev, unsigned char * data_pkt, unsigned int size)
 {
-    char* usb_pkt = new char[size + 1];
+    unsigned char* usb_pkt = new unsigned char[size + 1];
 
     usb_pkt[0] = 0x00;
     for(unsigned int i = 1; i < size + 1; i++)
@@ -22,7 +26,7 @@ static void send_usb_msg(hid_device* dev, char * data_pkt, unsigned int size)
         usb_pkt[i] = data_pkt[i-1];
     }
 
-    hid_write(dev, (unsigned char *)usb_pkt, size + 1);
+    hid_write(dev, usb_pkt, size + 1);
 
     delete[] usb_pkt;
 }
@@ -58,15 +62,13 @@ std::string SteelSeriesSenseiController::GetSerialString()
 {
     wchar_t serial_string[128];
     int ret = hid_get_serial_number_string(dev, serial_string, 128);
-    if (ret != 0)
+
+    if(ret != 0)
     {
         return("");
     }
 
-    std::wstring return_wstring = serial_string;
-    std::string return_string(return_wstring.begin(), return_wstring.end());
-
-    return(return_string);
+    return(StringUtils::wstring_to_string(serial_string));
 }
 
 steelseries_type SteelSeriesSenseiController::GetMouseType()
@@ -80,7 +82,7 @@ void SteelSeriesSenseiController::Save()
     /*-----------------------------------------------------*\
     | Saves to the internal configuration                   |
     \*-----------------------------------------------------*/
-    char usb_buf[9];
+    unsigned char usb_buf[9];
 
     /*-----------------------------------------------------*\
     | Zero out buffer                                       |
@@ -109,7 +111,7 @@ void SteelSeriesSenseiController::SetLightEffect
     unsigned char   blue
     )
 {
-    char usb_buf[65];
+    unsigned char usb_buf[65];
 
     /*-----------------------------------------------------*\
     | Zero out buffer                                       |
@@ -119,8 +121,8 @@ void SteelSeriesSenseiController::SetLightEffect
     /*-----------------------------------------------------*\
     | Set up Light Effect packet                            |
     \*-----------------------------------------------------*/
-    char dur1 = 0x27;
-    char dur2 = 0x10;                       //10 sec cycle
+    unsigned char dur1 = 0x27;
+    unsigned char dur2 = 0x10;            	//10 sec cycle
 
     switch(effect)
     {
@@ -248,7 +250,7 @@ void SteelSeriesSenseiController::SetColor
     unsigned char   blue
     )
 {
-    char usb_buf[65];
+    unsigned char usb_buf[65];
 
     /*-----------------------------------------------------*\
     | Zero out buffer                                       |
@@ -291,4 +293,3 @@ void SteelSeriesSenseiController::SetColorAll
     SetColor(0, red, green, blue);
     SetColor(1, red, green, blue);
 }
-

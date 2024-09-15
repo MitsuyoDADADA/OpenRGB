@@ -15,11 +15,9 @@
 #include "RGBController.h"
 #include "RGBController_AsusAuraCore.h"
 #include "RGBController_AsusAuraCoreLaptop.h"
-#include <hidapi/hidapi.h>
+#include <hidapi.h>
 
 #define AURA_CORE_VID                   0x0B05
-
-#define AURA_STRIX_SCAR_15_PID          0x19B6
 
 /******************************************************************************************\
 *                                                                                          *

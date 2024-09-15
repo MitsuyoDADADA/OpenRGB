@@ -19,6 +19,7 @@
 #include "RGBController.h"
 #include "AlienwareController.h"
 #include "LogManager.h"
+#include "StringUtils.h"
 
 typedef uint32_t alienware_platform_id;
 
@@ -30,7 +31,8 @@ static const std::map<alienware_platform_id, uint8_t> zone_quirks_table =
 {
     { 0x0C01,   4 },    // Dell G5 SE 5505
     { 0x0A01,  16 },    // Dell G7 15 7500
-    { 0x0E03,   4 }     // Dell G15   5511
+    { 0x0E03,   4 },    // Dell G15   5511
+    { 0x0E0A,   4 }     // Dell G15   5530
 
 };
 
@@ -46,7 +48,8 @@ static const std::map<alienware_platform_id, std::vector<const char*>> zone_name
                   "Light Bar 4",    "Light Bar 5",  "Light Bar 6",
                   "Light Bar 7",    "Light Bar 8",  "Light Bar 9",
                   "Light Bar 10",   "Light Bar 11", "Light Bar 12"              } },
-    { 0x0E03,   { "Left",           "Middle",       "Right",        "Numpad"    } }
+    { 0x0E03,   { "Left",           "Middle",       "Right",        "Numpad"    } },
+    { 0x0E0A,   { "Left",           "Middle",       "Right",        "Numpad"    } }
 };
 
 static void SendHIDReport(hid_device *dev, const unsigned char* usb_buf, size_t usb_buf_size)
@@ -87,9 +90,7 @@ AlienwareController::AlienwareController(hid_device* dev_handle, const hid_devic
     /*-----------------------------------------------------*\
     | Get serial number                                     |
     \*-----------------------------------------------------*/
-    std::wstring tmp_serial_number;
-    tmp_serial_number   = info.serial_number;
-    serial_number       = std::string(tmp_serial_number.begin(), tmp_serial_number.end());
+    serial_number       = StringUtils::wstring_to_string(info.serial_number);
 
     /*-----------------------------------------------------*\
     | Get zone information by checking firmware             |
@@ -654,7 +655,7 @@ void AlienwareController::UpdateDim()
 
     for(size_t i = 0; i < zones.size(); i++)
     {
-        dim_zone_map[zones[i].dim].emplace_back(i);
+        dim_zone_map[zones[i].dim].emplace_back((uint8_t)i);
     }
 
     for(std::pair<const uint8_t, std::vector<uint8_t>> &pair : dim_zone_map)
@@ -681,7 +682,7 @@ bool AlienwareController::UpdateDirect()
 
     for(size_t i = 0; i < zones.size(); i++)
     {
-        color_zone_map[zones[i].color[0]].emplace_back(i);
+        color_zone_map[zones[i].color[0]].emplace_back((uint8_t)i);
     }
 
     for(std::pair<const RGBColor, std::vector<uint8_t>> &pair : color_zone_map)
